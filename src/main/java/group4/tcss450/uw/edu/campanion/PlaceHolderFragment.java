@@ -7,6 +7,7 @@
 package group4.tcss450.uw.edu.campanion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -35,7 +37,7 @@ import java.net.URLEncoder;
  *
  * create an instance of this fragment.
  */
-public class PlaceHolderFragment extends Fragment {
+public class PlaceHolderFragment extends Fragment implements View.OnClickListener{
 
 
 
@@ -49,6 +51,10 @@ public class PlaceHolderFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_place_holder, container, false);
+
+        Button b = (Button) v.findViewById(R.id.buttonContinue);
+        b.setOnClickListener(this);
+
         return v;
     }
 
@@ -89,6 +95,9 @@ public class PlaceHolderFragment extends Fragment {
     }
 
 
-
-
+    @Override
+    public void onClick(View v) {
+        Intent myIntent = new Intent(getActivity(), UseActivity.class);
+        getActivity().startActivity(myIntent);
+    }
 }

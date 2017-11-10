@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/displayUsername"
-        android:layout_width="324dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
         android:text="TextView"
         android:layout_marginRight="16dp"
@@ -19,21 +19,54 @@
         android:layout_marginLeft="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="119dp"
         android:gravity= "center"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/displayPassword"
-        android:layout_width="324dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayUsername"
         android:gravity= "center"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <TextView
+        android:id="@+id/Welcome"
+        android:layout_width="0dp"
+        android:layout_height="69dp"
+        android:text="@string/Welcome"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/displayUsername"
+        android:gravity= "center"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/buttonContinue"
+        android:layout_width="114dp"
+        android:layout_height="56dp"
+        android:text="@string/Continue_key"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        tools:layout_editor_absoluteX="254dp" />
 </android.support.constraint.ConstraintLayout>

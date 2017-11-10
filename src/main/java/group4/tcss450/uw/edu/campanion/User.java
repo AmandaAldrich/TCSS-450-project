@@ -12,6 +12,7 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 
+    String fullName;
     String login;
     String password;
     String results;
@@ -31,6 +32,10 @@ public class User implements Serializable{
         return results.toString();
     }
 
+    public String getFullName(){
+        return fullName.toString();
+    }
+
 
     //setters
     public void setLogin(String login) {
@@ -43,6 +48,10 @@ public class User implements Serializable{
 
     public void setresults(String results) {
         this.results = results;
+    }
+
+    public void setFullName(String fullName){
+        this.fullName = fullName;
     }
 
 }

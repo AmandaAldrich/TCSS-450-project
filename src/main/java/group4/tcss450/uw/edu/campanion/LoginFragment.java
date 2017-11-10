@@ -7,6 +7,7 @@
 package group4.tcss450.uw.edu.campanion;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -27,6 +28,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +43,10 @@ import android.widget.TextView;
  * to handle interaction events.
  */
 public class LoginFragment extends Fragment implements View.OnClickListener{
-    //implement that interface again, after you get
-    // the first one working
 
     private OnFragmentInteractionListener lListener;
+    String login;
+    String password;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -93,10 +102,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         //if the fields are not empty and the helper methods return true
         if(!TextUtils.isEmpty(edit_text.getText()) && !TextUtils.isEmpty(edit_text_1.getText()) && atFlag && ruleFlag){
-            String login = edit_text.getText().toString();
-            String password = edit_text_1.getText().toString();
+            login = edit_text.getText().toString();
+            password = edit_text_1.getText().toString();
 
             if(lListener != null){
+                //call task here
                 lListener.onLoginFragmentInteraction(login, password);
             }
         }

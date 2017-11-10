@@ -11,4 +11,83 @@
     <string name="choice_key">choice key</string>
     <string name="login_key">login key</string>
     <string name="signup_key">signup key</string>
+    <string name="Welcome">Welcome</string>
+    <string name="Continue_key">continue</string>
+    <string name="title_activity_use">CAMPanion</string>
+    <string name="button_done">Delete</string>
+    <string name="action_add_task">Add Task</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="state_codes">
+        <item>AB</item>
+        <item>AK</item>
+        <item>AL</item>
+        <item>AR</item>
+        <item>AZ</item>
+        <item>BC</item>
+        <item>CA</item>
+        <item>CO</item>
+        <item>CT</item>
+        <item>DC</item>
+        <item>DE</item>
+        <item>FL</item>
+        <item>GA</item>
+        <item>HI</item>
+        <item>IA</item>
+        <item>ID</item>
+        <item>IL</item>
+        <item>IN</item>
+        <item>KS</item>
+        <item>KY</item>
+        <item>LA</item>
+        <item>MA</item>
+        <item>MB</item>
+        <item>ME</item>
+        <item>MD</item>
+        <item>MI</item>
+        <item>MN</item>
+        <item>MO</item>
+        <item>MS</item>
+        <item>MT</item>
+        <item>NB</item>
+        <item>NC</item>
+        <item>ND</item>
+        <item>NE</item>
+        <item>NH</item>
+        <item>NJ</item>
+        <item>NL</item>
+        <item>NM</item>
+        <item>NS</item>
+        <item>NT</item>
+        <item>NV</item>
+        <item>NU</item>
+        <item>NY</item>
+        <item>OH</item>
+        <item>OK</item>
+        <item>ON</item>
+        <item>OR</item>
+        <item>PA</item>
+        <item>PE</item>
+        <item>QC</item>
+        <item>RI</item>
+        <item>SC</item>
+        <item>SD</item>
+        <item>SK</item>
+        <item>TN</item>
+        <item>TX</item>
+        <item>UT</item>
+        <item>VA</item>
+        <item>VT</item>
+        <item>WA</item>
+        <item>WI</item>
+        <item>WV</item>
+        <item>WY</item>
+        <item>YT</item>
+    </string-array>
+
+
 </resources>
