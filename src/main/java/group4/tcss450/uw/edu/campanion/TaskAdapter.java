@@ -3,10 +3,14 @@ package group4.tcss450.uw.edu.campanion;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
@@ -40,8 +44,9 @@ public class TaskAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find Views to populate in inflated template
-        TextView textView = (TextView) view.findViewById(R.id.list_item_task_textview);
+        final TextView textView = (TextView) view.findViewById(R.id.list_item_task_textview);
         Button done_button = (Button) view.findViewById(R.id.list_item_task_done_button);
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.list_item_task_check);
 
         // Extract properties from cursor
         final String id = cursor.getString(PackingListFragment.COL_TASK_ID);
@@ -69,5 +74,23 @@ public class TaskAdapter extends CursorAdapter {
                 swapCursor(cursor);
             }
         });
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    textView.setTextColor(Color.rgb(98, 214, 239));
+                    textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+                else{
+                    textView.setTextColor(Color.BLACK);
+                    textView.setPaintFlags(textView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+
+            }
+        });
+
+
+
     }
 }

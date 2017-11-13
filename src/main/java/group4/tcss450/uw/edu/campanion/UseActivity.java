@@ -1,6 +1,7 @@
 package group4.tcss450.uw.edu.campanion;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -53,11 +55,11 @@ public class UseActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {loadFragment(new HomeFragment());}
-       });
+       });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -105,6 +107,7 @@ public class UseActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "Not Yet Implemented, Stay Tuned", Toast.LENGTH_LONG).show();
             return true;
         }
 
@@ -119,16 +122,8 @@ public class UseActivity extends AppCompatActivity
 
         if (id == R.id.packing_list) {
             loadFragment(new PackingListFragment());
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.Itinerary) {
+            Toast.makeText(getApplicationContext(), "Not Yet Implemented, Stay Tuned!", Toast.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,25 +131,4 @@ public class UseActivity extends AppCompatActivity
         return true;
     }
 
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        //doesnt need to be a switch statement now but
-        //might hold additional functionality in next update
-        switch(view.getId()) {
-
-            case R.id.list_item_task_check: //this is broken
-
-                TextView someTextView = (TextView) findViewById(R.id.list_item_task_textview);
-                if (checked) {
-                    someTextView.setPaintFlags(someTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                } else {
-                    someTextView.setPaintFlags(someTextView.getPaintFlags() | ~Paint.STRIKE_THRU_TEXT_FLAG);
-                }
-
-            }
-
-        }
 }
