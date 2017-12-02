@@ -1,5 +1,10 @@
 package group4.tcss450.uw.edu.campanion.Data;
+
 import android.provider.BaseColumns;
+
+/**
+ * Created by wilso on 11/29/2017.
+ */
 
 public class TaskContract {
 

@@ -1,5 +1,8 @@
 package group4.tcss450.uw.edu.campanion;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,16 +34,30 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import static group4.tcss450.uw.edu.campanion.R.id.checkBoxPet;
+
 
 /**
  * A simple {@link Fragment} subclass.
  *
  */
-public class HomeFragment extends Fragment implements  AdapterView.OnItemSelectedListener{
+public class HomeFragment extends Fragment implements  AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private static final String apiURL = "http://api.amp.active.com/camping/campgrounds?";
     public String state = "WA";
+
+    CheckBox semiHookups;
+    CheckBox fullHookups;
+    CheckBox equine;
+    CheckBox pet;
+
     public String myKey = "&api_key=7kgbp8puq2ffuw8rrm4nfg28";
+
+    private boolean petFlag = false;
+    private boolean equineFlag = false;
+    private boolean semiHookupFlag = false;
+    private boolean fullHookupFlag = false;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -54,6 +75,19 @@ public class HomeFragment extends Fragment implements  AdapterView.OnItemSelecte
         spinner.setAdapter(adapter);
         spinner.setSelection(1);
         spinner.setOnItemSelectedListener(this);
+
+        semiHookups = (CheckBox) v.findViewById(R.id.checkBoxSemiHook);
+        semiHookups.setOnCheckedChangeListener(this);
+
+        fullHookups = (CheckBox) v.findViewById(R.id.checkBoxFullHook);
+        fullHookups.setOnCheckedChangeListener(this);
+
+        pet = (CheckBox) v.findViewById(checkBoxPet);
+        pet.setOnCheckedChangeListener(this);
+
+        Button b = (Button) v.findViewById(R.id.sendButton);
+        b.setOnClickListener(this);
+
         // Inflate the layout for this fragment
         return v;
     }
@@ -62,13 +96,11 @@ public class HomeFragment extends Fragment implements  AdapterView.OnItemSelecte
         super.onStart();
         loadPage();
 
-
-
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         state = (String) parent.getAdapter().getItem(position);
-        loadPage();
 
     }
 
@@ -84,7 +116,47 @@ public class HomeFragment extends Fragment implements  AdapterView.OnItemSelecte
 
     }
 
-    // Implementation of AsyncTask used to download XML feed from stackoverflow.com.
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        switch (buttonView.getId()){
+
+            case R.id.checkBoxPet:
+                if(pet.isChecked()) {
+                    petFlag = true;
+                }else{
+                    petFlag = false;
+                }
+                break;
+
+            case R.id.checkBoxFullHook:
+                if(fullHookups.isChecked()) {
+                    fullHookupFlag = true;
+                }else{
+                    fullHookupFlag = false;
+                }
+                break;
+
+            case R.id.checkBoxSemiHook:
+                if(semiHookups.isChecked()) {
+                    semiHookupFlag = true;
+                }else{
+                    semiHookupFlag = false;
+                }
+                break;
+
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        loadPage();
+
+    }
+
+
     private class GetXmlTask extends AsyncTask<String, Void, String> {
         private Exception exception;
         TextView tv = (TextView) getActivity().findViewById(R.id.textView2);
@@ -99,7 +171,26 @@ public class HomeFragment extends Fragment implements  AdapterView.OnItemSelecte
             //where state finding and other queries will go
             String requestMethod = "GET";
 
-            String fullURL = apiURL + "pstate=" + state + myKey; //this will need to grow more intelligently
+            String stateURL = apiURL + "pstate=" + state; //+ myKey;
+
+            if(petFlag){
+
+                stateURL += "&pets=3010";
+            }
+            if(semiHookupFlag){
+
+                stateURL += "&water=3006&hookups=3004";
+
+            }
+            if(fullHookupFlag){
+
+                stateURL += "&water=3006&hookups=3004&sewer=3007";
+
+            }
+
+            String fullURL = stateURL + myKey;
+
+
             //as we implement more search criteria.
             InputStream stream = null;
             StringBuilder sb = new StringBuilder();
@@ -181,7 +272,7 @@ public class HomeFragment extends Fragment implements  AdapterView.OnItemSelecte
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
-            tv.setText(response + "\n End Stream");
+            tv.setText(response);
         }
 
     }

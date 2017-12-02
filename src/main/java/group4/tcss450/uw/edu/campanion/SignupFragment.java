@@ -181,7 +181,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener{
     private class signupTask extends AsyncTask<String, Void, String>{
 
         String response = "";
-        private final String SERVICE = "Register2.php";
+        private final String SERVICE = "register.php";
         Button b = (Button) getActivity().findViewById(R.id.acceptSignupButton);
 
         @Override

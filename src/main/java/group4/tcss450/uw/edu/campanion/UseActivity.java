@@ -1,5 +1,6 @@
 package group4.tcss450.uw.edu.campanion;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -73,6 +74,9 @@ public class UseActivity extends AppCompatActivity
 
     private void loadFragment(Fragment frag) {
 
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        frag.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_Container, frag)

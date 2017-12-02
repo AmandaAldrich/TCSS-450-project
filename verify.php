@@ -1,5 +1,7 @@
 <?php
 
+#this is the verify for the link register, and possibly the code register
+
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 	// Connect to the Database
@@ -16,9 +18,11 @@ error_reporting(E_ALL);
 	$users = $user_query->fetchAll(PDO::FETCH_ASSOC);
 	try {
 		if ($users) {
+			
 			#start an array to hold the results
 			$result = array("code"=>100, "message" =>"UserName Found", "size"=>count($users));
 			$user_array = array();
+			
 			#iterate through the results
 			for ($i = 0; $i < count($users); $i++) { 
 				$update_sql = "UPDATE betterUser SET active = 'y' WHERE username = '$email'";
@@ -26,7 +30,7 @@ error_reporting(E_ALL);
 				$users2 = $user_query2->fetchAll(PDO::FETCH_ASSOC);
 				if ($users2) {
 					#start an array to hold the results
-					$result = array("code"=>300, "message" =>"UserName Found", "size"=>count($users));
+					$result = array("code"=>300, "message" =>"Verified", "size"=>count($users));
 					$user_array = array();
 				}
 			}

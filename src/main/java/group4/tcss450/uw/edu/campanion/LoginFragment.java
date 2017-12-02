@@ -129,19 +129,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             }
 
             //if the rules checks throw false
-            else if(!ruleFlag){
+            if(!ruleFlag){
                 edit_text_1.setError("Passwords must contain a number and a special character" +
                         "and must be longer than three characters");
             }
 
             //if theh email is blank
-            else if(TextUtils.isEmpty(edit_text.getText())){
+            if(TextUtils.isEmpty(edit_text.getText())){
                 edit_text.setError("You left this field blank");
 
             }
 
             //if the password is blank
-            else{
+            if(TextUtils.isEmpty(edit_text_1.getText())){
                 edit_text_1.setError("You left this field blank");
             }
         }

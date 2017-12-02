@@ -46,6 +46,10 @@ public class PlaceHolderFragment extends Fragment implements View.OnClickListene
     private static final String PARTIAL_URL
             = "http://cssgate.insttech.washington.edu/~aldrich7/";
 
+    User used;
+    String login;
+    String theCode;
+
     public PlaceHolderFragment() {
         // Required empty public constructor
     }
@@ -59,6 +63,13 @@ public class PlaceHolderFragment extends Fragment implements View.OnClickListene
 
         Button b = (Button) v.findViewById(R.id.buttonContinue);
         b.setOnClickListener(this);
+        b.setEnabled(false);
+
+        Button b1 = (Button) v.findViewById(R.id.verifyButton);
+        b1.setOnClickListener(this);
+
+        Button b2 = (Button) v.findViewById(R.id.buttonResend);
+        b2.setOnClickListener(this);
 
         return v;
     }
@@ -71,14 +82,12 @@ public class PlaceHolderFragment extends Fragment implements View.OnClickListene
         if (getArguments() != null) {
 
             if(getArguments().containsKey(getString(R.string.login_key))){
-                User used = (User) getArguments().getSerializable(getString(R.string.login_key));
+                used = (User) getArguments().getSerializable(getString(R.string.login_key));
                 updateLoginContent(used);
-                updatepasswordContent(used);
             }
             else {
-                User used = (User) getArguments().getSerializable(getString(R.string.signup_key));
+                used = (User) getArguments().getSerializable(getString(R.string.signup_key));
                 updateLoginContent(used);
-                updatepasswordContent(used);
 
 
             }
@@ -87,23 +96,214 @@ public class PlaceHolderFragment extends Fragment implements View.OnClickListene
 
     //updates the textView displaying login
     public void updateLoginContent(User used) {
-        String login = used.getLogin();
-        TextView tv = (TextView) getActivity().findViewById(R.id.displayUsername);
-        tv.setText(login);
+        login = used.getLogin();
+        EditText edit_text = (EditText) getActivity().findViewById(R.id.editNumberForCode);
+        try {
+            theCode = edit_text.getText().toString();
+        }
+        catch(NumberFormatException e){
+            edit_text.setError("Hi! This has to be the number we sent you.");
+
+        }
+
+
     }
 
-    //updates the textView displaying password
-    public void updatepasswordContent(User used) {
-        String pw = used.getPassword();
-        TextView tv = (TextView) getActivity().findViewById(R.id.displayPassword);
-        tv.setText(pw);
-    }
+
 
 
     @Override
     public void onClick(View v) {
-        Intent myIntent = new Intent(getActivity(), UseActivity.class);
-        getActivity().startActivity(myIntent);
+
+        switch (v.getId()){
+
+            case R.id.buttonContinue:
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("login", used);
+
+
+                Intent myIntent = new Intent(getActivity(), UseActivity.class);
+                myIntent.putExtra("Login", bundle);
+                getActivity().startActivity(myIntent);
+                break;
+
+            case R.id.verifyButton:
+
+                AsyncTask<String, Void, String> checkVerify = new verifyTask();
+                checkVerify.execute(PARTIAL_URL, login, theCode);
+
+                break;
+
+            case R.id.buttonResend:
+
+                AsyncTask<String, Void, String> resendEmail = new resendEmailTask();
+                resendEmail.execute();
+
+                break;
+        }
+
+    }
+
+    private class verifyTask extends AsyncTask<String, Void, String>{
+
+        String response = "";
+        private final String SERVICE = "verify.php";
+        Button b = (Button) getActivity().findViewById(R.id.buttonContinue);
+        Button b1 = (Button) getActivity().findViewById(R.id.verifyButton);
+
+        @Override
+        protected void onPreExecute() {
+            b.setEnabled(false);
+            b1.setEnabled(false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection urlConnection = null;
+            String partURL = params[0];
+            URL urlObject = null;
+            try {
+                urlObject = new URL(partURL + SERVICE);
+                urlConnection = (HttpURLConnection) urlObject.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setDoOutput(true);
+
+                OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
+                String data = URLEncoder.encode("email", "UTF-8")
+                        + "=" + URLEncoder.encode(params[1], "UTF-8") + "&" +
+                        URLEncoder.encode("code", "UTF-8")
+                        + "=" + URLEncoder.encode(params[2], "UTF-8");
+                wr.write(data);
+                wr.flush();
+                InputStream content = urlConnection.getInputStream();
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                String s = "";
+                while ((s = buffer.readLine()) != null) {
+                    response += s;
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                response = "Unable to connect, Reason: "
+                        + e.getMessage();
+            } finally {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+
+            return response;
+        }
+
+        protected void onPostExecute(String result) {
+
+            b1.setEnabled(true);
+            int test = 0;
+            JSONObject myJSON2;
+            try{
+                myJSON2 = new JSONObject(result);
+                Log.v("very","made it here");
+                test = myJSON2.getInt("code");
+                if(test == 300){
+
+                    b.setEnabled(true);
+                    Log.v("verifyCode", "" + test);
+                }
+
+                else{
+
+                    Log.v("verifyCode", "" + test);
+                }
+            }catch(JSONException e){
+                Log.wtf("verify", "" + test);
+            }
+
+
+
+        }
+    }
+
+    private class resendEmailTask extends AsyncTask<String, Void, String>{
+
+        String response = "";
+        private final String SERVICE = "resendEmail.php";
+        Button b = (Button) getActivity().findViewById(R.id.buttonContinue);
+
+
+        @Override
+        protected void onPreExecute() {
+            b.setEnabled(false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpURLConnection urlConnection = null;
+            String partURL = params[0];
+            URL urlObject = null;
+            try {
+                urlObject = new URL(partURL + SERVICE);
+                urlConnection = (HttpURLConnection) urlObject.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setDoOutput(true);
+
+                OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
+                String data = URLEncoder.encode("email", "UTF-8")
+                        + "=" + URLEncoder.encode(params[1], "UTF-8");
+                wr.write(data);
+                wr.flush();
+                InputStream content = urlConnection.getInputStream();
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                String s = "";
+                while ((s = buffer.readLine()) != null) {
+                    response += s;
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                response = "Unable to connect, Reason: "
+                        + e.getMessage();
+            } finally {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+
+            return response;
+        }
+
+        protected void onPostExecute(String result) {
+
+            int test = 0;
+            JSONObject myJSON2;
+            try{
+
+                myJSON2 = new JSONObject(result);
+                test = myJSON2.getInt("code");
+                if(test == 300){
+
+                    Log.v("code", "" + test);
+                }
+
+                else{
+
+                    Log.v("codeElse", "" + test);
+                }
+            }catch(JSONException e){
+                Log.wtf("login", "Things went doubly hinky");
+            }
+
+
+
+        }
     }
 
 }

@@ -26,7 +26,7 @@ error_reporting(E_ALL);
 			 
 			
 		} else {
-			$result = array("code"=>200, "message"=>"Username or Passowrd not found");
+			$result = array("code"=>200, "message"=>"Username or Password not found");
 		}
 		echo json_encode($result);
 		$db = null;

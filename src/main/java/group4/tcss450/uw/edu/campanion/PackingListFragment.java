@@ -1,26 +1,39 @@
 package group4.tcss450.uw.edu.campanion;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Paint;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import group4.tcss450.uw.edu.campanion.Data.TaskContract;
 import group4.tcss450.uw.edu.campanion.Data.TaskDBHelper;
@@ -57,7 +70,7 @@ public class PackingListFragment extends Fragment {
         //Find the listView
         ListView listView = (ListView) rootView.findViewById(R.id.listview_tasks);
 
-        //Get DBHelper to read from database
+        //Get TaskDBHelper to read from database
         TaskDBHelper helper = new TaskDBHelper(getActivity());
         SQLiteDatabase sqlDB = helper.getReadableDatabase();
 
@@ -84,8 +97,8 @@ public class PackingListFragment extends Fragment {
         switch (id){
             case R.id.action_add_task:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Add a task");
-                builder.setMessage("What do you want to do?");
+                builder.setTitle("Add an Item");
+                builder.setMessage("What do you want to pack?");
                 final EditText inputField = new EditText(getActivity());
                 builder.setView(inputField);
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
@@ -94,7 +107,7 @@ public class PackingListFragment extends Fragment {
                         //Get user input
                         String inputTask = inputField.getText().toString();
 
-                        //Get DBHelper to write to database
+                        //Get TaskDBHelper to write to database
                         TaskDBHelper helper = new TaskDBHelper(getActivity());
                         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -124,10 +137,6 @@ public class PackingListFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 
 
 
