@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 	$username = 'aldrich7';
 	$password = 'vesyop';
 	$userTest = $_POST['userTest'];
+	$coder = 459343;
 	
 	try {
 		$db = new PDO($dsn, $username, $password);

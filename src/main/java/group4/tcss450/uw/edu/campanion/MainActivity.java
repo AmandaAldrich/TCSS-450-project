@@ -6,6 +6,7 @@
 
 package group4.tcss450.uw.edu.campanion;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -71,11 +72,10 @@ public class MainActivity extends AppCompatActivity implements ChoiceFragment.On
 
     //login hands off to our placeholder for now
     @Override
-    public void onLoginFragmentInteraction(String login, String password) {
+    public void onLoginFragmentInteraction(String login, boolean verified) {
 
         User user = new User();
         user.setLogin(login);
-        user.setPassword(password);
 
 
         PlaceHolderFragment displayFragment;
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements ChoiceFragment.On
 
         // Commit the transaction
         transaction2.commit();
+
+
 
     }
 

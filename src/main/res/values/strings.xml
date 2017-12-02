@@ -19,8 +19,9 @@
     <string name="okay_button">Okay</string>
     <string name="resend_button">resend Email</string>
 
-    <string name="notice_of_resend">The resend button will lock for 5 seconds after the button has
-    been pressed. This is to prevent a large volume of emails being created, a headache for all. Please
+    <string name="notice_of_resend">The resend button will lock for a bit after the button has
+    been pressed. This is to prevent a large volume of emails being created, a headache for all.
+    After you receive the email, click the link and try to log in again. Please
     check you spam folder for our email, and enjoy our app ~CAMPanion Team</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 	$password = 'vesyop';
 	$userTest = $_POST['userTest'];
 	$passTest = $_POST['passTest'];
-	$coder = 5;
+	$coder = 459343;
 	
 	try {
 		$db = new PDO($dsn, $username, $password);

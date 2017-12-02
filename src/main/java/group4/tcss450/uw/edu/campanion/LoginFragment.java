@@ -7,6 +7,7 @@
 package group4.tcss450.uw.edu.campanion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -167,7 +168,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     }
 
     public interface OnFragmentInteractionListener {
-        void onLoginFragmentInteraction(String login, String password);
+        void onLoginFragmentInteraction(String login, boolean verified);
 
     }
 
@@ -228,21 +229,34 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             b.setEnabled(true);
             int test = 0;
             JSONObject myJSON2;
+            boolean verified = true;
             try{
 
                 myJSON2 = new JSONObject(result);
                 test = myJSON2.getInt("code");
-                if(test == 100){
-                    if(lListener != null){
-                        //call task here
-                        lListener.onLoginFragmentInteraction(login, password);
-                    }
+                if(test == 400){ //verified
+
+                    //call task here
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("login", login);
+
+
+                    Intent myIntent = new Intent(getActivity(), UseActivity.class);
+                    myIntent.putExtra("Login", bundle);
+                    getActivity().startActivity(myIntent);
+
+
                     Log.v("code", "" + test);
                 }
                 else if(test == 200){
                     EditText userText = (EditText) getActivity().findViewById(R.id.loginEdit);
                     userText.setError("Username or Password Incorrect");
                     Log.v("code", "" + test);
+                }
+                else if(test == 500){ //not verified
+                    Log.v("code", ""+test);
+                    lListener.onLoginFragmentInteraction(login, verified);
+
                 }
                 else{
                     EditText userText = (EditText) getActivity().findViewById(R.id.loginEdit);

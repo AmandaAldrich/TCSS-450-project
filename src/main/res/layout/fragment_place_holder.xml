@@ -25,43 +25,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonContinue"
-        android:layout_width="114dp"
-        android:layout_height="56dp"
-        android:text="@string/Continue_key"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.971"
-        tools:layout_editor_absoluteX="254dp" />
-
-    <Button
         android:id="@+id/buttonResend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/resend_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="123dp"
+        android:layout_marginLeft="132dp"
         app:layout_constraintLeft_toLeftOf="parent" />
-
-    <EditText
-        android:id="@+id/editNumberForCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:fontFamily="serif-monospace"
-        android:inputType="number"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textForNotice" />
 
     <TextView
         android:id="@+id/textForNotice"
@@ -81,14 +52,4 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Welcome" />
 
-    <Button
-        android:id="@+id/verifyButton"
-        android:layout_width="84dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/okay_button"
-        app:layout_constraintTop_toBottomOf="@+id/editNumberForCode"
-        android:layout_marginRight="91dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="209dp" />
 </android.support.constraint.ConstraintLayout>
