@@ -273,6 +273,9 @@ public class HomeFragment extends Fragment implements  AdapterView.OnItemSelecte
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
             tv.setText(response);
+            if(response.equals("")){
+                tv.setText("Oops, this search has turned up no results!");
+            }
         }
 
     }

@@ -18,23 +18,30 @@
     <string name="action_add_task">Add Item</string>
     <string name="okay_button">Okay</string>
     <string name="resend_button">resend Email</string>
+    <string name="hi">Hi There!</string>
 
     <string name="notice_of_resend">The resend button will lock for a bit after the button has
     been pressed. This is to prevent a large volume of emails being created, a headache for all.
     After you receive the email, click the link and try to log in again. Please
     check you spam folder for our email, and enjoy our app ~CAMPanion Team</string>
 
+    <string name="about_us">Hi there! We\'re the developers of the CAMPanion app, Amanda and Mamadou. We
+    are lucky enough to be living and going to school in the Pacific Northwest with some of the greatest
+    outdoor spaces ever. That\'s why we wanted to create an app that helped others get out in the great
+    outdoors, like we can. We decided the best way to do that was to create the app we wish we had, with a
+    way to see campsites and a packing list, and we just kept adding things as we went. We hope you love
+    the app as much as we do, and maybe we\'ll see you out on the trails.</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Logout</string>
 
     <string name="stateEx">Pick a state or province</string>
     <string name="semiHook">Partial Hookups</string>
     <string name="fullHook">Full Hookups</string>
     <string name="pet">Pets</string>
     <string name="equine">Equine</string>
-
 
 
     <string-array name="state_codes">

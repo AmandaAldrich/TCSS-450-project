@@ -240,7 +240,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("login", login);
 
-
                     Intent myIntent = new Intent(getActivity(), UseActivity.class);
                     myIntent.putExtra("Login", bundle);
                     getActivity().startActivity(myIntent);

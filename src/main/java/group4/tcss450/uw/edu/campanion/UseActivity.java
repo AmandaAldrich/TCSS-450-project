@@ -111,7 +111,8 @@ public class UseActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(getApplicationContext(), "Not Yet Implemented, Stay Tuned", Toast.LENGTH_LONG).show();
+            Intent myIntent = new Intent(this, MainActivity.class);
+            startActivity(myIntent);
             return true;
         }
 
@@ -128,6 +129,10 @@ public class UseActivity extends AppCompatActivity
             loadFragment(new PackingListFragment());
         } else if (id == R.id.Itinerary) {
             Toast.makeText(getApplicationContext(), "Not Yet Implemented, Stay Tuned!", Toast.LENGTH_LONG).show();
+        } else if(id == R.id.HomeFrag){
+            loadFragment(new HomeFragment());
+        } else if(id == R.id.About){
+            loadFragment(new AboutFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

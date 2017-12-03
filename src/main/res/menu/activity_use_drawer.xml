@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/HomeFrag"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
         <item
             android:id="@+id/packing_list"
             android:icon="@drawable/ic_format_align_justify_black_24dp"
@@ -10,6 +15,12 @@
             android:id="@+id/Itinerary"
             android:icon="@drawable/ic_terrain_black_24dp"
             android:title="Itinerary" />
+        <item
+            android:id="@+id/About"
+            android:icon="@drawable/ic_nature_people_black_24dp"
+            android:title="About" />
+
+
 
     </group>
 
