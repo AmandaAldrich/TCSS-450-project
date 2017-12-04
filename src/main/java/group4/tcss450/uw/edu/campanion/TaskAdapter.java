@@ -16,6 +16,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import group4.tcss450.uw.edu.campanion.Data.TaskContract;
 import group4.tcss450.uw.edu.campanion.Data.TaskDBHelper;
@@ -28,18 +29,37 @@ public class TaskAdapter extends CursorAdapter {
 
     private static Context context;
     TaskDBHelper helper;
+    List<Integer> selectedItemsPositions;
 
     public TaskAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
         this.context = context;
         helper = new TaskDBHelper(context);
+        selectedItemsPositions = new ArrayList<>();
     }
 
     // The newView method is used to inflate a new view and return it,
     // you don't bind any data to the view at this point.
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.list_item_task, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.list_item_task, parent, false);
+
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.list_item_task_check);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                int position = (int) compoundButton.getTag();
+                if (b) {
+                    //check whether its already selected or not
+                    if (!selectedItemsPositions.contains(position))
+                        selectedItemsPositions.add(position);
+                } else {
+                    //remove position if unchecked checked item
+                    selectedItemsPositions.remove((Object) position);
+                }
+            }
+        });
+        return view;
     }
 
     // The bindView method is used to bind all data to a given view
@@ -49,8 +69,6 @@ public class TaskAdapter extends CursorAdapter {
         // Find Views to populate in inflated template
         final TextView textView = (TextView) view.findViewById(R.id.list_item_task_textview);
         Button done_button = (Button) view.findViewById(R.id.list_item_task_done_button);
-        CheckBox checkBox = (CheckBox) view.findViewById(R.id.list_item_task_check);
-
         // Extract properties from cursor
         final String id = cursor.getString(PackingListFragment.COL_TASK_ID);
         final String task = cursor.getString(PackingListFragment.COL_TASK_NAME);
@@ -77,12 +95,21 @@ public class TaskAdapter extends CursorAdapter {
                 swapCursor(cursor);
             }
         });
+
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.list_item_task_check);
+        checkBox.setTag(cursor.getPosition());
+
+        if (selectedItemsPositions.contains(cursor.getPosition()))
+            checkBox.setChecked(true);
+        else
+            checkBox.setChecked(false);
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    textView.setTextColor(Color.rgb(98, 214, 239));
+                    textView.setTextColor(Color.parseColor("#689F38"));
                     textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }
                 else{
