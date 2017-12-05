@@ -127,10 +127,12 @@ public class UseActivity extends AppCompatActivity
 
         if (id == R.id.packing_list) {
             loadFragment(new PackingListFragment());
-        } else if (id == R.id.Itinerary) {
-            Toast.makeText(getApplicationContext(), "Not Yet Implemented, Stay Tuned!", Toast.LENGTH_LONG).show();
+        //} else if (id == R.id.Itinerary) {
+        //    Toast.makeText(getApplicationContext(), "Not Yet Implemented, Stay Tuned!", Toast.LENGTH_LONG).show();
         } else if(id == R.id.HomeFrag){
             loadFragment(new HomeFragment());
+        } else if(id == R.id.Dictionary){
+            loadFragment(new DictionaryFragment());
         } else if(id == R.id.About){
             loadFragment(new AboutFragment());
         }

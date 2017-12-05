@@ -20,8 +20,7 @@
     <string name="resend_button">resend Email</string>
     <string name="hi">Hi There!</string>
 
-    <string name="notice_of_resend">The resend button will lock for a bit after the button has
-    been pressed. This is to prevent a large volume of emails being created, a headache for all.
+    <string name="notice_of_resend">The resend button will send you a new email should yours not arrive.
     After you receive the email, click the link and try to log in again. Please
     check you spam folder for our email, and enjoy our app ~CAMPanion Team</string>
 
@@ -43,6 +42,11 @@
     <string name="pet">Pets</string>
     <string name="equine">Equine</string>
 
+    <string name="dictionary">Full Hookups: Access to Water, Electricity, and Sewer \nPartial Hookups: Access to Water and Electricity \nElectricity: For our app, currently we check for 30 amps or more \nPets: Campsite is conducive to furry friends
+    </string>
+
+    <string name="USForest">US Forestry Line: 800-832-1355</string>
+    <string name="CANForest">Canadian Natural Resources Line: 1-855-862-1809</string>
 
     <string-array name="state_codes">
         <item>AB</item>

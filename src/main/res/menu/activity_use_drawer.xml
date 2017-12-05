@@ -11,14 +11,21 @@
             android:id="@+id/packing_list"
             android:icon="@drawable/ic_format_align_justify_black_24dp"
             android:title="Packing List" />
-        <item
+        <!---<item
             android:id="@+id/Itinerary"
             android:icon="@drawable/ic_terrain_black_24dp"
-            android:title="Itinerary" />
+            android:title="Itinerary" /> -->
+        <item
+            android:id="@+id/Dictionary"
+            android:icon="@drawable/ic_format_align_justify_black_24dp"
+            android:title="Dictionary" />
+
         <item
             android:id="@+id/About"
             android:icon="@drawable/ic_nature_people_black_24dp"
             android:title="About" />
+
+
 
 
 
